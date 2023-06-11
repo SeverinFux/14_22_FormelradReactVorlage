@@ -14,6 +14,8 @@ export default function Formelrad() {
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log("handleSubmit")
+        //Added, so CalI method got called also, when Form submit
+        calculate(event)
         if (values.u === "" && values.i === "") {
             /*calculate u and i */
             setValues(values => ({...values, u: Math.sqrt(values.p * values.r)}));
@@ -26,6 +28,25 @@ export default function Formelrad() {
             /*calculate u and p */
             setValues(values => ({...values, u: values.i * values.r}));
             setValues(values => ({...values, p: values.i * values.i * values.r}));
+        }
+    }
+
+
+    const calculate = (event) => {
+        event.preventDefault();
+        console.log("calculate");
+        if (values.i === "" && values.r === "") {
+            /*calculate i and r */
+            setValues(values => ({...values, i: values.p / values.u}));
+            setValues(values => ({...values, r: values.u * values.u / values.p}));
+        } else if (values.i === "" && values.p === "") {
+            /*calculate i and p */
+            setValues(values => ({...values, i: values.u / values.r}));
+            setValues(values => ({...values, p: values.u * values.u / values.r}));
+        } else {
+            /*calculate r and p */
+            setValues(values => ({...values, r: values.u / values.i}));
+            setValues(values => ({...values, p: values.u * values.i}));
         }
     }
 
