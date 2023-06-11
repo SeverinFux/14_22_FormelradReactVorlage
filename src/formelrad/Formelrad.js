@@ -26,10 +26,14 @@ export default function Formelrad() {
         message: "red"
     })
 
+    function resetColors() {
+        setColors(colors => ({...colors, u: "black", i: "black", r: "black", p: "black"}));
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log("handleSubmit")
-
+        resetColors();
         let count = 0;
         if (values.u === "") count++;
         if (values.i === "") count++;
@@ -82,10 +86,10 @@ export default function Formelrad() {
                     <img src={formelrad} width="200" alt="Formelrad"/>
                 </header>
                 <form onSubmit={handleSubmit}>
-                    <InputField color={colors.u} value={values.u} label="Spannung" handleChange={e => {setValues(values => ({...values, u: e.target.value}))}} />
-                    <InputField color={colors.i} value={values.i} label="Stromstärke" handleChange={e => {setValues(values => ({...values, i: e.target.value}))}} />
-                    <InputField color={colors.r} value={values.r} label="Widerstand" handleChange={e => {setValues(values => ({...values, r: e.target.value}))}} />
-                    <InputField color={colors.p} value={values.p} label="Leistung" handleChange={e => {setValues(values => ({...values, p: e.target.value}))}} />
+                    <InputField color={colors.u} value={values.u} label="Spannung" handleChange={e => {setValues(values => ({...values, u: e.target.value}))}}/>
+                    <InputField color={colors.i} value={values.i} label="Stromstärke" handleChange={e => {setValues(values => ({...values, i: e.target.value}))}}/>
+                    <InputField color={colors.r} value={values.r} label="Widerstand" handleChange={e => {setValues(values => ({...values, r: e.target.value}))}}/>
+                    <InputField color={colors.p} value={values.p} label="Leistung" handleChange={e => {setValues(values => ({...values, p: e.target.value}))}}/>
                     <button type="submit">Calculate</button>
                     <p>{values.message}</p>
                     <button style={{margin:10}} onClick={handleClear}>Clear</button>
